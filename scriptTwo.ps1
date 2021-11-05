@@ -22,3 +22,31 @@
 # Your script should save the outputof the information that it gathersto a file.You can determine the type and organization of the file.
 
 
+
+
+
+# Pass parameters into powershell
+
+param([string]$ipaddress="127.0.0.1", [switch]$ImSpecial)
+
+
+# Bios Information
+
+Get-WmiObject win32_bios
+
+
+# Programs installed on the computer
+
+
+
+
+# current programs running
+
+
+
+
+# accounts that exist on the computer
+
+
+
+
