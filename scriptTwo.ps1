@@ -28,7 +28,7 @@ else
     $Info += "==================================="
     $Info += "=   Programs Running On Computer  ="
     $Info += "==================================="
-    $Info += -Query "select * from win32_service where State='Running'" -ComputerName $ip |
+    $Info += Get-WmiObject win32_service | Where State -eq Running # -Query "select * from win32_service where State='Running'" -ComputerName $ip |
         Format-List -Property PSComputerName, Name, ExitCode, Name, ProcessID, StartMode, State, Status
 
     # accounts that exist on the computer
@@ -36,6 +36,13 @@ else
     $Info += "=       Accounts On Computer      ="
     $Info += "==================================="
     $Info += Get-WmiObject Win32_UserAccount -ComputerName $ip
+
+    
+    # information about Powershell version
+    $Info += "==================================="
+    $Info += "=   Local Powershell Information  ="
+    $Info += "==================================="
+    $Info += Out-String -InputObject $PSVersionTable
 
     #output information to .csv
     $Info | Out-File -FilePath .\outputComputerInformation.txt
